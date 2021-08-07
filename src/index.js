@@ -38,7 +38,39 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    
+    const letterLength = 10
+        , bynarySymbolLength = 2
+        , dot = '.'
+        , dash = '-'
+        , space = '**********';
+
+    result = '';
+
+    for(let i = 0; i < expr.length; i += letterLength){
+        
+        let bynaryLetter = expr.substring(i, i + letterLength);
+        
+        if (space == bynaryLetter) {
+            result += " ";
+            continue;
+        } else {
+
+            let morseCode = '';
+
+            for(let j = 0; j < bynaryLetter.length; j += bynarySymbolLength){
+
+                let bynarySymbol = bynaryLetter.substring(j, j + bynarySymbolLength);
+
+                if (bynarySymbol[0] == '1') {
+                    if (bynarySymbol[1] == '0') morseCode += dot;
+                    else morseCode += dash;                
+                }
+            }
+            result += MORSE_TABLE[morseCode];
+        }
+    }
+    return result;
 }
 
 module.exports = {
